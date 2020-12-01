@@ -1,0 +1,42 @@
+<!DOCTYPE HTML><html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IMU Test</title>
+  <style>
+    body {
+      min-width: 310px;
+    	max-width: 800px;
+    	height: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>IMU Test</h2>
+  <div id="imu" class="container"></div>
+</body>
+<script>
+
+setInterval(function ( ) {
+  var ipElement = document.getElementById("imu");
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var imuResponse = JSON.parse(this.responseText);
+      imuResponse.timestamp = new Date().toUTCString();
+      ipElement.innerHTML = JSON.stringify(imuResponse);
+      //console.log(this.responseText);
+    }
+  };
+  xhttp.open("GET", "/imu", true);
+  xhttp.send();
+}, 1000 ) ;
+
+</script>
+</html>
