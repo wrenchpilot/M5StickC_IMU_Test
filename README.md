@@ -8,3 +8,16 @@
 
 ## Install ESP32 & M5Stick-C Libraries
 * In the Skecth->Include Library menu, install ESP32 and M5StickC libraries
+
+## Install ESPAsyncWebServer Library
+* (Click here to download)[https://github.com/me-no-dev/ESPAsyncWebServer/archive/master.zip] the ESPAsyncWebServer library. You should have a .zip folder in your Downloads folder
+* Unzip the .zip folder and you should get ESPAsyncWebServer-master folder
+* Rename your folder from ESPAsyncWebServer-master to ESPAsyncWebServer
+* Move the ESPAsyncWebServer folder to your Arduino IDE installation libraries folder
+
+## Install Async TCP Library for ESP32
+* (Click here to download the)[https://github.com/me-no-dev/AsyncTCP/archive/master.zip] AsyncTCP library. You should have a .zip folder in your Downloads folder
+* Unzip the .zip folder and you should get AsyncTCP-master folder
+* Rename your folder from AsyncTCP-master to AsyncTCP
+* Move the AsyncTCPfolder to your Arduino IDE installation libraries folder
+* Finally, re-open your Arduino IDE
