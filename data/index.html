@@ -61,7 +61,7 @@ const chart = Highcharts.chart('container', options)
 
 var chartIMU = new Highcharts.Chart({
   chart:{ renderTo : 'imu' },
-  title: { text: 'IMU Gyro' },
+  title: { text: 'IMU GyroX' },
   series: [{
     showInLegend: false,
     data: []
@@ -76,7 +76,7 @@ var chartIMU = new Highcharts.Chart({
     dateTimeLabelFormats: { second: '%H:%M:%S' }
   },
   yAxis: {
-    title: { text: 'Value' }
+    title: { text: 'Value gyroX' }
   },
   credits: { enabled: false }
 });
@@ -90,16 +90,14 @@ setInterval(function ( ) {
       
       //imuResponse.timestamp = new Date().toUTCString();
 
-      var dataX = imuResponse.gyro[0];
+      var dataX = parseFloat(imuResponse.gyro[0]);
 
       var x = (new Date()).getTime(),
           y = dataX;
-      console.log(chartIMU.series[0].data.length);
-      if(chartIMU.series[0].data.length > 40) {
-        chartIMU.series[0].addPoint([x, y], true, true, true);
-      } else {
-        chartIMU.series[0].addPoint([x, y], true, false, true);
-      }
+      
+          //console.log(y);
+      
+      chartIMU.series[0].addPoint([x, y]);
 
       //imuElement.innerHTML = JSON.stringify(imuResponse);
       //console.log(this.responseText);
