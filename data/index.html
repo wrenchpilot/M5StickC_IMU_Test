@@ -24,13 +24,13 @@
 <script>
 
 setInterval(function ( ) {
-  var ipElement = document.getElementById("imu");
+  var imuElement = document.getElementById("imu");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var imuResponse = JSON.parse(this.responseText);
       imuResponse.timestamp = new Date().toUTCString();
-      ipElement.innerHTML = JSON.stringify(imuResponse);
+      imuElement.innerHTML = JSON.stringify(imuResponse);
       //console.log(this.responseText);
     }
   };
