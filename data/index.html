@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
   <title>IMU Test</title>
   <style>
     body {
@@ -23,14 +24,84 @@
 </body>
 <script>
 
+/*
+ const json = [
+	{"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
+  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044}
+]
+
+// Changing timestamps for visalisation
+const dataX = json.map((o, i) => [o.time + i, o.x])
+const dataY = json.map((o, i) => [o.time + i, o.y])
+const dataZ = json.map((o, i) => [o.time + i, o.z])
+
+const options = {
+  xAxis: {
+  	type: 'datetime',
+  },
+  series: [{
+  	name: 'x',
+    data: dataX
+  }, {
+  	name: 'y',
+    data: dataY
+  }, {
+  	name: 'z',
+    data: dataZ
+  }]
+}
+
+const chart = Highcharts.chart('container', options)
+*/
+
+var chartIMU = new Highcharts.Chart({
+  chart:{ renderTo : 'imu' },
+  title: { text: 'IMU Gyro' },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#059e8a' }
+  },
+  xAxis: { type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'Value' }
+  },
+  credits: { enabled: false }
+});
+
 setInterval(function ( ) {
-  var imuElement = document.getElementById("imu");
+  //var imuElement = document.getElementById("imu");
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var imuResponse = JSON.parse(this.responseText);
-      imuResponse.timestamp = new Date().toUTCString();
-      imuElement.innerHTML = JSON.stringify(imuResponse);
+      
+      //imuResponse.timestamp = new Date().toUTCString();
+
+      var dataX = imuResponse.gyro[0];
+
+      var x = (new Date()).getTime(),
+          y = dataX;
+      console.log(chartIMU.series[0].data.length);
+      if(chartIMU.series[0].data.length > 40) {
+        chartIMU.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartIMU.series[0].addPoint([x, y], true, false, true);
+      }
+
+      //imuElement.innerHTML = JSON.stringify(imuResponse);
       //console.log(this.responseText);
     }
   };
