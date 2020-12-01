@@ -24,41 +24,6 @@
 </body>
 <script>
 
-/*
- const json = [
-	{"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044},
-  {"time":1486983229,"x":-1.556,"y":-0.432,"z":2.044}
-]
-
-// Changing timestamps for visalisation
-const dataX = json.map((o, i) => [o.time + i, o.x])
-const dataY = json.map((o, i) => [o.time + i, o.y])
-const dataZ = json.map((o, i) => [o.time + i, o.z])
-
-const options = {
-  xAxis: {
-  	type: 'datetime',
-  },
-  series: [{
-  	name: 'x',
-    data: dataX
-  }, {
-  	name: 'y',
-    data: dataY
-  }, {
-  	name: 'z',
-    data: dataZ
-  }]
-}
-
-const chart = Highcharts.chart('container', options)
-*/
-
 var chartIMU = new Highcharts.Chart({
   chart:{ renderTo : 'imu' },
   title: { text: 'IMU GyroX' },
