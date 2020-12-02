@@ -21,6 +21,10 @@
 * Rename your folder from AsyncTCP-master to AsyncTCP
 * Move the AsyncTCPfolder to your Arduino IDE installation libraries folder
 * Finally, re-open your Arduino IDE
+## Compile and Upload
+* Compile sketch and upload
+* Upload the index.html file vile the ESP32 Filesystem Uploader
+* Visit http://<M5TICKC_WIRELESS_IP> (Check serial monitor for IP)
 
 ## Screenshot
 ![Three graphs showing gyro, accelerometoer and AHRS](/screenshot.png?raw=true "Screenshot")
