@@ -1,4 +1,6 @@
-<!DOCTYPE HTML><html>
+<!DOCTYPE HTML>
+<html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,10 +9,11 @@
   <style>
     body {
       min-width: 310px;
-    	max-width: 800px;
-    	height: 400px;
+      max-width: 800px;
+      height: 400px;
       margin: 0 auto;
     }
+
     h2 {
       font-family: Arial;
       font-size: 2.5rem;
@@ -18,59 +21,81 @@
     }
   </style>
 </head>
+
 <body>
   <h2>IMU Test</h2>
   <div id="imu" class="container"></div>
 </body>
 <script>
-
-var chartIMU = new Highcharts.Chart({
-  chart:{ renderTo : 'imu' },
-  title: { text: 'IMU GyroX' },
-  series: [{
-    showInLegend: false,
-    data: []
-  }],
-  plotOptions: {
-    line: { animation: false,
-      dataLabels: { enabled: true }
+  var chartGyroXYZ = new Highcharts.Chart({
+    chart: {
+      renderTo: 'imu'
     },
-    series: { color: '#059e8a' }
-  },
-  xAxis: { type: 'datetime',
-    dateTimeLabelFormats: { second: '%H:%M:%S' }
-  },
-  yAxis: {
-    title: { text: 'Value gyroX' }
-  },
-  credits: { enabled: false }
-});
-
-setInterval(function ( ) {
-  //var imuElement = document.getElementById("imu");
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var imuResponse = JSON.parse(this.responseText);
-      
-      //imuResponse.timestamp = new Date().toUTCString();
-
-      var dataX = parseFloat(imuResponse.gyro[0]);
-
-      var x = (new Date()).getTime(),
-          y = dataX;
-      
-          //console.log(y);
-      
-      chartIMU.series[0].addPoint([x, y]);
-
-      //imuElement.innerHTML = JSON.stringify(imuResponse);
-      //console.log(this.responseText);
+    title: {
+      text: 'IMU GyroXYZ'
+    },
+    series: [{
+        name: 'X',
+        type: 'spline',
+        data: []
+      }, {
+        name: 'Y',
+        type: 'spline',
+        data: []
+      },
+      {
+        name: 'Z',
+        type: 'spline',
+        data: []
+      }
+    ],
+    plotOptions: {
+      spline: {
+        animation: true,
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: {
+        second: '%H:%M:%S'
+      }
+    },
+    credits: {
+      enabled: false
     }
-  };
-  xhttp.open("GET", "/imu", true);
-  xhttp.send();
-}, 1000 ) ;
+  });
 
+  setInterval(function () {
+    //var imuElement = document.getElementById("imu");
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var imuResponse = JSON.parse(this.responseText);
+
+        //imuResponse.timestamp = new Date().toUTCString();
+
+        var dataX = parseFloat(imuResponse.gyro[0]);
+        var dataY = parseFloat(imuResponse.gyro[1]);
+        var dataZ = parseFloat(imuResponse.gyro[2]);
+
+        var x = (new Date()).getTime();
+
+        //console.log(y);
+
+        chartGyroXYZ.series[0].addPoint([x, dataX]);
+        chartGyroXYZ.series[1].addPoint([x, dataY]);
+        chartGyroXYZ.series[2].addPoint([x, dataZ]);
+
+        //imuElement.innerHTML = JSON.stringify(imuResponse);
+        //console.log(this.responseText);
+      }
+    };
+    xhttp.open("GET", "/imu", true);
+    xhttp.send();
+  }, 1000);
 </script>
+
 </html>
