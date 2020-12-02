@@ -59,6 +59,7 @@ String readIMU() {
 
 void setup() {
   M5.begin();
+  M5.Lcd.setRotation(3);
   M5.IMU.Init();
 
   // Serial port for debugging purposes
@@ -67,6 +68,7 @@ void setup() {
   // Initialize SPIFFS
   if (!SPIFFS.begin()) {
     Serial.println("An Error has occurred while mounting SPIFFS");
+    M5.Lcd.println("An Error has occurred while mounting SPIFFS");
     return;
   }
 
@@ -75,10 +77,12 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
     Serial.println("Connecting to WiFi..");
+    M5.Lcd.println("Connecting to WiFi..");
   }
 
   // Print ESP32 Local IP Address
   Serial.println(WiFi.localIP());
+  M5.Lcd.println(WiFi.localIP());
 
   // Route for root / web page
   server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
