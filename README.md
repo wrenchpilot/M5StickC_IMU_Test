@@ -24,7 +24,7 @@
 ## Compile and Upload
 * Compile sketch and upload
 * Upload the index.html file vile the ESP32 Filesystem Uploader
-* Visit http://<M5TICKC_WIRELESS_IP> (Check serial monitor for IP)
+* Visit http://<M5TICKC_WIRELESS_IP> (Check LCD Display for IP)
 
 ## Screenshot
 ![Three graphs showing gyro, accelerometoer and AHRS](/screenshot.png?raw=true "Screenshot")
