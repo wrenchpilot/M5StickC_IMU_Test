@@ -21,3 +21,6 @@
 * Rename your folder from AsyncTCP-master to AsyncTCP
 * Move the AsyncTCPfolder to your Arduino IDE installation libraries folder
 * Finally, re-open your Arduino IDE
+
+## Screenshot
+![Three graphs showing gyro, accelerometoer and AHRS](/screenshot.png?raw=true "Screenshot")
