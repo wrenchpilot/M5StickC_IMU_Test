@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/stock/highstock.js"></script>
+  <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <title>IMU Test</title>
   <style>
@@ -31,16 +31,33 @@
   <div id="ahrsPRY" class="container"></div>
 </body>
 <script>
-  var chartGyroXYZ = new Highcharts.Chart({
+  var chartGyroXYZ = new Highcharts.stockChart({
     chart: {
       renderTo: 'gyroXYZ'
     },
     title: {
       text: 'IMU GyroXYZ'
     },
+    rangeSelector: {
+      buttons: [{
+        count: 1,
+        type: 'second',
+        text: '1s'
+      }, {
+        count: 5,
+        type: 'second',
+        text: '5s'
+      }, {
+        type: 'all',
+        text: 'All'
+      }],
+      inputEnabled: false,
+      selected: 1
+    },
     series: [{
         name: 'X',
         type: 'spline',
+        pointInterval: 60 * 10000,
         data: []
       }, {
         name: 'Y',
@@ -72,13 +89,29 @@
     }
   });
 
-  var chartAccXYZ = new Highcharts.Chart({
+  var chartAccXYZ = new Highcharts.stockChart({
     chart: {
       renderTo: 'accXYZ'
     },
     title: {
       text: 'IMU AccXYZ'
     },
+    rangeSelector: {
+      buttons: [{
+        count: 1,
+        type: 'second',
+        text: '1s'
+      }, {
+        count: 5,
+        type: 'second',
+        text: '5s'
+      }, {
+        type: 'all',
+        text: 'All'
+      }],
+      inputEnabled: false,
+      selected: 1
+    },
     series: [{
         name: 'X',
         type: 'spline',
@@ -113,12 +146,28 @@
     }
   });
 
-  var chartAhrsPRY = new Highcharts.Chart({
+  var chartAhrsPRY = new Highcharts.stockChart({
     chart: {
       renderTo: 'ahrsPRY'
     },
     title: {
       text: 'IMU AhrsPRY'
+    },
+    rangeSelector: {
+      buttons: [{
+        count: 1,
+        type: 'second',
+        text: '1s'
+      }, {
+        count: 5,
+        type: 'second',
+        text: '5s'
+      }, {
+        type: 'all',
+        text: 'All'
+      }],
+      inputEnabled: false,
+      selected: 1
     },
     series: [{
         name: 'Pitch',
