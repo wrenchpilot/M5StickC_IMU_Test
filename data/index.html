@@ -24,12 +24,14 @@
 
 <body>
   <h2>IMU Test</h2>
-  <div id="imu" class="container"></div>
+  <div id="gyroXYZ" class="container"></div>
+  <div id="accXYZ" class="container"></div>
+  <div id="ahrsPRY" class="container"></div>
 </body>
 <script>
   var chartGyroXYZ = new Highcharts.Chart({
     chart: {
-      renderTo: 'imu'
+      renderTo: 'gyroXYZ'
     },
     title: {
       text: 'IMU GyroXYZ'
@@ -68,29 +70,120 @@
     }
   });
 
+  var chartAccXYZ = new Highcharts.Chart({
+    chart: {
+      renderTo: 'accXYZ'
+    },
+    title: {
+      text: 'IMU AccXYZ'
+    },
+    series: [{
+        name: 'X',
+        type: 'spline',
+        data: []
+      }, {
+        name: 'Y',
+        type: 'spline',
+        data: []
+      },
+      {
+        name: 'Z',
+        type: 'spline',
+        data: []
+      }
+    ],
+    plotOptions: {
+      spline: {
+        animation: true,
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: {
+        second: '%H:%M:%S'
+      }
+    },
+    credits: {
+      enabled: false
+    }
+  });
+
+  var chartAhrsPRY = new Highcharts.Chart({
+    chart: {
+      renderTo: 'ahrsPRY'
+    },
+    title: {
+      text: 'IMU AhrsPRY'
+    },
+    series: [{
+        name: 'Pitch',
+        type: 'spline',
+        data: []
+      }, {
+        name: 'Roll',
+        type: 'spline',
+        data: []
+      },
+      {
+        name: 'Yaw',
+        type: 'spline',
+        data: []
+      }
+    ],
+    plotOptions: {
+      spline: {
+        animation: true,
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: {
+        second: '%H:%M:%S'
+      }
+    },
+    credits: {
+      enabled: false
+    }
+  });
+
   setInterval(function () {
     //var imuElement = document.getElementById("imu");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
+
         var imuResponse = JSON.parse(this.responseText);
-
-        //imuResponse.timestamp = new Date().toUTCString();
-
-        var dataX = parseFloat(imuResponse.gyro[0]);
-        var dataY = parseFloat(imuResponse.gyro[1]);
-        var dataZ = parseFloat(imuResponse.gyro[2]);
-
         var x = (new Date()).getTime();
 
-        //console.log(y);
+        var gyroX = parseFloat(imuResponse.gyro[0]);
+        var gyroY = parseFloat(imuResponse.gyro[1]);
+        var gyroZ = parseFloat(imuResponse.gyro[2]);
 
-        chartGyroXYZ.series[0].addPoint([x, dataX]);
-        chartGyroXYZ.series[1].addPoint([x, dataY]);
-        chartGyroXYZ.series[2].addPoint([x, dataZ]);
+        var accX = parseFloat(imuResponse.accel[0]);
+        var accY = parseFloat(imuResponse.accel[1]);
+        var accZ = parseFloat(imuResponse.accel[2]);
 
-        //imuElement.innerHTML = JSON.stringify(imuResponse);
-        //console.log(this.responseText);
+        var ahrsP = parseFloat(imuResponse.ahrs[0]);
+        var ahrsR = parseFloat(imuResponse.ahrs[1]);
+        var ahrsY = parseFloat(imuResponse.ahrs[2]);
+
+        chartGyroXYZ.series[0].addPoint([x, gyroX]);
+        chartGyroXYZ.series[1].addPoint([x, gyroY]);
+        chartGyroXYZ.series[2].addPoint([x, gyroZ]);
+
+        chartAccXYZ.series[0].addPoint([x, accX]);
+        chartAccXYZ.series[1].addPoint([x, accY]);
+        chartAccXYZ.series[2].addPoint([x, accZ]);
+
+        chartAhrsPRY.series[0].addPoint([x, ahrsP]);
+        chartAhrsPRY.series[1].addPoint([x, ahrsR]);
+        chartAhrsPRY.series[2].addPoint([x, ahrsY]);
       }
     };
     xhttp.open("GET", "/imu", true);
