@@ -3,7 +3,7 @@
 * Select M5Stick-C under Board Manager menu
   
 ## Install Arduino ESP32 Filesystem Uploader
-* [Download] (https://github.com/me-no-dev/arduino-esp32fs-plugin/releases/download/1.0/ESP32FS-1.0.zip) the ESP32 Filesystem Uploader
+* [Download](https://github.com/me-no-dev/arduino-esp32fs-plugin/releases/download/1.0/ESP32FS-1.0.zip) the ESP32 Filesystem Uploader
 * Unzip into <Aurduino Folder>/tools (create folder if does not exist)
 
 ## Install ESP32 & M5Stick-C Libraries
