@@ -24,7 +24,6 @@ var chartGyroXYZ = new Highcharts.stockChart({
     series: [{
             name: 'X',
             type: 'spline',
-            pointInterval: 60 * 10000,
             data: []
         }, {
             name: 'Y',

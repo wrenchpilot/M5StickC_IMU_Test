@@ -53,7 +53,7 @@ String readIMU() {
   ahrs.add(String(yaw));
 
   serializeJson(doc, json);
-  
+
   return json;
 }
 
@@ -89,9 +89,13 @@ void setup() {
     request->send(SPIFFS, "/index.html");
   });
 
-  server.on("/highcharts.js", HTTP_GET, [](AsyncWebServerRequest *request){
+  server.on("/highcharts.js", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/highcharts.js", "text/javascript");
-});
+  });
+
+  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send(SPIFFS, "/style.css", "text/css");
+  });
 
   server.on("/imu", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(200, "text/plain", readIMU().c_str());
