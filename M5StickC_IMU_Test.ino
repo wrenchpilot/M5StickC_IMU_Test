@@ -89,6 +89,10 @@ void setup() {
     request->send(SPIFFS, "/index.html");
   });
 
+  server.on("/highcharts.js", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/highcharts.js", "text/javascript");
+});
+
   server.on("/imu", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(200, "text/plain", readIMU().c_str());
   });
