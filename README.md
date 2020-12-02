@@ -23,7 +23,7 @@
 * Finally, re-open your Arduino IDE
 ## Compile and Upload
 * Compile sketch and upload
-* Upload the index.html file vile the ESP32 Filesystem Uploader
+* Upload the index.html file in the /data folder via the ESP32 Filesystem Uploader
 * Visit http://<M5STICKC_WIRELESS_IP> (Check LCD Display for IP)
 
 ## Screenshot
