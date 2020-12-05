@@ -10,7 +10,7 @@
 * In the Skecth->Include Library menu, install ESP32 and M5StickC libraries
 
 ## Install ESPAsyncWebServer Library
-* [Download](https://github.com/me-no-dev/ESPAsyncWebServer/archive/master.zip]) the ESPAsyncWebServer library. You should have a .zip folder in your Downloads folder
+* [Download](https://github.com/me-no-dev/ESPAsyncWebServer/archive/master.zip) the ESPAsyncWebServer library. You should have a .zip folder in your Downloads folder
 * Unzip the .zip folder and you should get ESPAsyncWebServer-master folder
 * Rename your folder from ESPAsyncWebServer-master to ESPAsyncWebServer
 * Move the ESPAsyncWebServer folder to your Arduino IDE installation libraries folder
