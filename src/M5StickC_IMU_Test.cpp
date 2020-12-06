@@ -73,12 +73,10 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting to WiFi..");
     M5.Lcd.println("Connecting to WiFi..");
   }
 
   // Print ESP32 Local IP Address
-  Serial.println(WiFi.localIP());
   M5.Lcd.println(WiFi.localIP());
 
   // Route for root / web page
