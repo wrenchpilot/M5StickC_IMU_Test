@@ -1,3 +1,6 @@
+## TODO 
+* Rewrite README for Platform.io
+
 ## Install Arduino ESP32 Board Profile
 * Enter https://dl.espressif.com/dl/package_esp32_index.json into the “Additional Board Manager URLs”
 * Select M5Stick-C under Board Manager menu
