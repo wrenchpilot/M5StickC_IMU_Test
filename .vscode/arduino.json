@@ -1,6 +1,0 @@
-{
-    "board": "esp32:esp32:m5stick-c",
-    "configuration": "PartitionScheme=min_spiffs,UploadSpeed=1500000,DebugLevel=none",
-    "sketch": "M5StickC_IMU_Test.ino",
-    "port": "/dev/tty.usbserial-55560E9E8B"
-}
