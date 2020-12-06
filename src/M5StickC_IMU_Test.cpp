@@ -4,10 +4,7 @@
 #include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
-
-// Replace with your network credentials
-const char* ssid = "";
-const char* password = "";
+#include "wifi_config.h"
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
