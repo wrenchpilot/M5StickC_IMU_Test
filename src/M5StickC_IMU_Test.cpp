@@ -1,6 +1,5 @@
 #include <M5StickC.h>
 #include <WiFi.h>
-#include <Wire.h>
 #include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
@@ -61,13 +60,9 @@ void setup()
   M5.Lcd.setRotation(3);
   M5.IMU.Init();
 
-  // Serial port for debugging purposes
-  Serial.begin(115200);
-
   // Initialize SPIFFS
   if (!SPIFFS.begin())
   {
-    Serial.println("An Error has occurred while mounting SPIFFS");
     M5.Lcd.println("An Error has occurred while mounting SPIFFS");
     return;
   }
