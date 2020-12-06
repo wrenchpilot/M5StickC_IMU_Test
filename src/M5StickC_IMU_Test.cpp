@@ -4,7 +4,7 @@
 #include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
-#include "wifi_config.h"
+#include "../include/wifi_config.h"
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
