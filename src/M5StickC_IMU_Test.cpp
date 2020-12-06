@@ -18,10 +18,11 @@ float gyroY = 0.0F;
 float gyroZ = 0.0F;
 
 float pitch = 0.0F;
-float roll  = 0.0F;
-float yaw   = 0.0F;
+float roll = 0.0F;
+float yaw = 0.0F;
 
-String readIMU() {
+String readIMU()
+{
   //Test Reading the IMU
   M5.IMU.getGyroData(&gyroX, &gyroY, &gyroZ);
   M5.IMU.getAccelData(&accX, &accY, &accZ);
@@ -30,7 +31,7 @@ String readIMU() {
   String json;
 
   //Create JSON document
-  DynamicJsonDocument  doc(300);
+  DynamicJsonDocument doc(300);
 
   doc["sensor"] = "imu";
 
@@ -54,7 +55,8 @@ String readIMU() {
   return json;
 }
 
-void setup() {
+void setup()
+{
   M5.begin();
   M5.Lcd.setRotation(3);
   M5.IMU.Init();
@@ -63,7 +65,8 @@ void setup() {
   Serial.begin(115200);
 
   // Initialize SPIFFS
-  if (!SPIFFS.begin()) {
+  if (!SPIFFS.begin())
+  {
     Serial.println("An Error has occurred while mounting SPIFFS");
     M5.Lcd.println("An Error has occurred while mounting SPIFFS");
     return;
@@ -71,7 +74,8 @@ void setup() {
 
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(1000);
     M5.Lcd.println("Connecting to WiFi..");
   }
@@ -80,19 +84,19 @@ void setup() {
   M5.Lcd.println(WiFi.localIP());
 
   // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/index.html");
   });
 
-  server.on("/highcharts.js", HTTP_GET, [](AsyncWebServerRequest * request) {
+  server.on("/highcharts.js", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/highcharts.js", "text/javascript");
   });
 
-  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
+  server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/style.css", "text/css");
   });
 
-  server.on("/imu", HTTP_GET, [](AsyncWebServerRequest * request) {
+  server.on("/imu", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(200, "text/plain", readIMU().c_str());
   });
 
@@ -100,4 +104,4 @@ void setup() {
   server.begin();
 }
 
-void loop() { }
+void loop() {}
